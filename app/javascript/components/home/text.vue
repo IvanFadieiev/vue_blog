@@ -27,6 +27,10 @@ export default {
      }
    },
 
+   created: function(){
+       this.$store.commit('setMsg', 'Please reed agreement!!!');
+   },
+
    methods: {
      tog: function(state){
        this.$store.commit('toggle')
@@ -37,6 +41,7 @@ export default {
      },
 
      redirect: function(){
+       this.$store.commit('setMsg', 'Now you can register or sign in!')
        this.tog();
        this.checked ?
         this.$router.push('/')
