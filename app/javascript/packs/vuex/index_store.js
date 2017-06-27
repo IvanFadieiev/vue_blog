@@ -6,11 +6,11 @@ Vue.use(Vuex);
 export const store = new Vuex.Store({
   state: {
     agreement: false,
-    msg: 'Greeting!!!'
+    msg: 'Greeting!!!',
   },
   mutations: {
-    toggle (state) {
-      state.agreement = !state.agreement
+    toggle (state, bool) {
+      state.agreement = bool;
     },
 
     setMsg (state, text) {

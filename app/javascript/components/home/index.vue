@@ -16,8 +16,10 @@
   export default {
     data: function () {
       return {
-        message: "Greetings!!!"
       }
+    },
+
+    created: function() {
     }
   }
 </script>

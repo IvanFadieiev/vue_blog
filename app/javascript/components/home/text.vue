@@ -23,27 +23,25 @@ Additional details may be found in the Library Catalogue under the heading 'Term
 export default {
    data: function () {
      return {
-       checked: false
+       checked: this.$store.getters.get_agre
      }
    },
 
    created: function(){
-       this.$store.commit('setMsg', 'Please reed agreement!!!');
+       this.$store.getters.get_agre ?
+           this.$store.commit('setMsg', 'Now you can register or sign in!') :
+           this.$store.commit('setMsg', 'Please reed agreement!!!')
    },
 
    methods: {
      tog: function(state){
-       this.$store.commit('toggle')
+       this.$store.commit('toggle', true)
      },
-
-     checked: function(){
-       this.checked = !this.checked
-     },
-
+       
      redirect: function(){
-       this.$store.commit('setMsg', 'Now you can register or sign in!')
+       this.$store.commit('setMsg', 'Now you can register or sign in!');
        this.tog();
-       this.checked ?
+         this.$store.getters.get_agre ?
         this.$router.push('/')
         :
        ''
