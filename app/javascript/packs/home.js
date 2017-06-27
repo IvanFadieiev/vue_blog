@@ -3,6 +3,9 @@ import VueRouter from 'vue-router';
 import Index from '../components/home/index.vue'
 import Routes from './routes.js';
 import { store } from './vuex/index_store'
+import VueResource from 'vue-resource';
+
+Vue.use(VueResource);
 
 Vue.use(VueRouter);
 const router = new VueRouter({
