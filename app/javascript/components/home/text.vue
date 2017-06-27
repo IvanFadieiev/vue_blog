@@ -13,7 +13,7 @@ Systematically download, distribute, or retain substantial portions of informati
 Additional details may be found in the Library Catalogue under the heading 'Terms of Use', and on the providers' website or database.
     </p>
     <p>
-      <input type="checkbox" id="checkbox" v-model="checked" v-on:click='redirect'>
+      <input type="checkbox" id="checkbox" v-model="checked" @click='redirect'>
       <label for="checkbox">{{ checked ? 'Agree' : 'Think well' }}</label>
     </p>
   </div>
@@ -37,14 +37,12 @@ export default {
      tog: function(state){
        this.$store.commit('toggle', true)
      },
-       
      redirect: function(){
        this.$store.commit('setMsg', 'Now you can register or sign in!');
        this.tog();
          this.$store.getters.get_agre ?
-        this.$router.push('/')
-        :
-       ''
+            this.$router.push('/') :
+            ''
      }
    }
  }
