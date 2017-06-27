@@ -28,13 +28,18 @@ export default {
    },
 
    methods: {
+     tog: function(state){
+       this.$store.commit('toggle')
+     },
+
      checked: function(){
        this.checked = !this.checked
      },
 
      redirect: function(){
+       this.tog();
        this.checked ?
-       this.$router.push('/')
+        this.$router.push('/')
         :
        ''
      }
