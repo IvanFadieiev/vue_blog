@@ -14,6 +14,8 @@
           <div class="col-md-10 post">
             <div class="post_title">
               {{ obj.post.title }}
+              <button class="btn btn-outline-danger update_post" v-if='auth(obj.author.token)' @click="delete_post(obj.post.id)">Delete</button>
+              <button class="btn btn-info update_post">Update</button>
             </div>
             <div class="post_body">
               {{ obj.post.body }}
@@ -49,10 +51,24 @@
     },
 
     methods: {
+      auth: function(token) {
+        var result = (this.$session.exists() && this.$session.get('jwt') == token ? true : false);
+        return result;
+      },
+      delete_post: function(id) {
+        this.$http.post('/delete_post/' + id, {}, {
+          headers: {
+            'X-CSRF-Token': document.getElementsByName('csrf-token')[0].getAttribute('content')
+          }
+        }).then(function(response){
+          if (response.data.success) {
+            this.$store.commit('deletePost', id)
+          }
+        })
+      },
       posts: function() {
         return this.$store.getters.getPosts[0]
       },
-
       return_posts: function() {
         if(this.child_posts_list) {
           return this.child_posts_list;

@@ -1,5 +1,6 @@
 class PostsController < ApplicationController
   before_action :authenticate
+  before_action :set_post, only: [:destroy]
 
   def index
     posts = Post.includes(:user).all.order(created_at: :desc).map { |post| { post: post, author: post.user} }
@@ -16,10 +17,16 @@ class PostsController < ApplicationController
   end
 
   def destroy
-
+    if @post.destroy
+      render json: { success: true, post_id: @post.id }
+    end
   end
 
   private
+
+  def set_post
+    @post = Post.find_by_id(params[:id])
+  end
 
   def authenticate
     @current_user ||= User.find_by_token(request.headers['Access-Token'])

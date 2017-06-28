@@ -23,6 +23,16 @@ export const store = new Vuex.Store({
     setNewPosts (state, post) {
         state.posts[0].unshift(post);
     },
+    deletePost (state, id) {
+      var array = state.posts[0];
+      var i;
+      array.map(function(post){
+          if (post.post.id == id) {
+              i = array.indexOf(post);
+              array.splice(i, 1);
+          }
+      })
+    },
   },
 
   getters: {

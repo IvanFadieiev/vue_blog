@@ -9,6 +9,6 @@ Rails.application.routes.draw do
   post '/users',       to: 'users#create'
 
   post '/posts',       to: 'posts#create'
-  post '/delete_post', to: 'posts#destroy'
+  post '/delete_post/:id', to: 'posts#destroy'
   get  '/posts',       to: 'posts#index'
 end
