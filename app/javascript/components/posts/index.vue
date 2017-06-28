@@ -41,7 +41,15 @@
     props: ['child_posts_list'],
 
     beforeCreate: function () {
-      if (!this.$session.exists()) {
+      function getCookie(name) {
+        var matches = document.cookie.match(new RegExp(
+            "(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
+        ));
+        return matches ? decodeURIComponent(matches[1]) : undefined;
+      };
+      var token = getCookie('token');
+      if (!this.$session.exists() || this.$session.get('jwt') != token) {
+        this.$session.destroy();
         this.$router.push('/')
       };
       this.$http.get('/posts').then(response => {

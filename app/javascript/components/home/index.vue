@@ -26,6 +26,26 @@
       }
     },
 
+    beforeCreate: function(){
+      function getCookie(name) {
+          var matches = document.cookie.match(new RegExp(
+              "(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
+          ));
+          return matches ? decodeURIComponent(matches[1]) : undefined;
+      };
+      var token = getCookie('token');
+      if (token){
+          this.$session.start();
+          this.$session.set('jwt', token);
+          this.$store.commit('toggle', true)
+          this.$router.push('/posts')
+      } else {
+          if (!this.$session.exists()) {
+              this.$router.push('/')
+          };
+      }
+    },
+
     created: function() {
     },
 
