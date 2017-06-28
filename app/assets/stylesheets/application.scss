@@ -15,3 +15,53 @@
 .input-group {
   padding-bottom: 10px !important;
 }
+
+.delete_sess_button, .posts_navigation {
+  bottom: 60px;
+  left: 25px;
+}
+
+.posts_navigation a {
+  margin-bottom: 10px;
+  width: 100%;
+}
+
+.log_out {
+  position: relative;
+  float: right;
+}
+.author {
+  padding: 15px;
+  background-color: #597ac0;
+  border-radius: 30px 0 0 30px;
+}
+
+.show_post.row{
+  margin-bottom: 10px;
+}
+
+.post {
+  background-color: #cce7fe;
+  border-radius: 0 30px 30px 0;
+
+  .post_title {
+    border-bottom: 2px solid black;
+    color: #000049;
+    font-size: 35px;
+  }
+
+  .post_created {
+    color: lightslategrey;
+    position: relative;
+    left: 75%;
+    width: 25%;
+  }
+}
+
+li {
+  list-style-type: none; /* Убираем маркеры */
+}
+
+.new_post #posts_list {
+  padding-top: 30px;
+}

@@ -39,6 +39,9 @@
             this.errors = true;
             this.error_messages = auth_error;
           } else {
+            this.$session.start();
+            this.$store.commit('setMsg', 'Now you can enjoy this blog=)');
+            this.$session.set('jwt', response.body.token);
             this.$router.push('/posts');
           }
         });

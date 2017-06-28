@@ -1,21 +1,19 @@
 class SessionsController < ApplicationController
-
   def new
   end
 
   def create
     user = User.find_by_email(params[:email])
     if user && user.authenticate(params[:password])
-      session[:user_id] = user.id
-      render json: { success: true }
+      user&.update_token
+      render json: { success: true, token: user.token }
     else
       render json: { auth_error: 'Invalid Auth' }
     end
   end
 
   def destroy
-    session[:user_id] = nil
-    redirect_to '/login'
+    User.find_by_token(params[:token])&.update_attribute(:token, '')
+    render json: { success: true }
   end
-
 end

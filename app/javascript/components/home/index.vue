@@ -1,10 +1,17 @@
 <template>
   <div id="index" class="col-md-12" >
     <div class="container">
-      <div class="jumbotron">
-        <div id="header">
+      <div class="jumbotron row">
+        <div id="header" class="col-md-8">
           <h1>Vue Blog</h1>
           {{ this.$store.getters.getMsg }}
+        </div>
+        <div v-if='check_session()' class="posts_navigation col-md-2">
+          <router-link class='btn btn-danger ' to="/posts">Posts list</router-link><br />
+          <router-link class='btn btn-danger ' to="/new_posts">New post</router-link><br />
+        </div>
+        <div v-if='check_session()' class="delete_sess_button col-md-2">
+          <button class="log_out" @click="delete_vue_session">Log Out</button>
         </div>
       </div>
       <router-view></router-view>
@@ -20,6 +27,21 @@
     },
 
     created: function() {
+    },
+
+    methods: {
+        delete_vue_session: function(){
+            this.$http.post('/logout', { token: this.$session.get('jwt') }, {
+                headers: {
+                    'X-CSRF-Token': document.getElementsByName('csrf-token')[0].getAttribute('content')
+                }
+            });
+            this.$session.destroy();
+            this.$router.push('/')
+        },
+        check_session: function() {
+            return this.$session.exists()
+        }
     }
   }
 </script>

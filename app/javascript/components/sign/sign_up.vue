@@ -62,6 +62,7 @@
                 this.errors = true;
                 this.error_messages = errors;
               } else {
+                this.$store.commit('setMsg', 'Now you can enjoy this blog=)');
                 this.$router.push('/posts');
               }
           });

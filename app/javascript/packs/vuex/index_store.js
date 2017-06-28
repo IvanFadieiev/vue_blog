@@ -7,6 +7,7 @@ export const store = new Vuex.Store({
   state: {
     agreement: false,
     msg: 'Greeting!!!',
+    posts: [],
   },
 
   mutations: {
@@ -14,8 +15,14 @@ export const store = new Vuex.Store({
       state.agreement = bool;
     },
     setMsg (state, text) {
-        state.msg = text
-    }
+      state.msg = text;
+    },
+    setPosts (state, post) {
+      state.posts.unshift(post);
+    },
+    setNewPosts (state, post) {
+        state.posts[0].unshift(post);
+    },
   },
 
   getters: {
@@ -24,6 +31,9 @@ export const store = new Vuex.Store({
     },
     getMsg (state) {
       return state.msg
+    },
+    getPosts (state) {
+      return state.posts
     }
   }
 });
